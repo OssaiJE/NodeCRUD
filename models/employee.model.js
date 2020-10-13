@@ -16,4 +16,10 @@ var employeeSchema = new mongoose.Schema({
     }
 });
 
+//Custom Validation of email
+employeeSchema.path('email').validate((val) => {
+    emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    return emailRegex.test(val);
+}, 'Invalid e-mail.');
+
 mongoose.model('Employee', employeeSchema);
